@@ -1,0 +1,3 @@
+# Private Events: A Rails App Built For The Odin Project
+
+This is **Private Events**, a Rails App Built as part of the *Ruby on Rails* course for [The Odin Project](https://theodinproject.com). This app allows users to sign up, create events and invite other users to their events, and also to accept invitations. A user can attend many events, and an event can be attended by many users. This was my first time modeling many to many relationships.
