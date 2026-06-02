@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Upcoming Events:</h1>
+  <% @events.each do |event| %>
+    <ul>
+      <li>
+        <h2> <%= event.title %> </h2>
+      </li>
+      <li>
+        <%= event.date %>
+      </li>
+      <li>
+        <%= event.location %>
+      </li>
+      <li>
+        <%= event.more_info %>
+      </li>
+    </ul>
+  <% end %>
+</div>
