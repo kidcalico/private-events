@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
   end
 
   def new
@@ -12,12 +13,18 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     if @event.save
-      redirect_to events_path, notice: "Event successfully created."
+      redirect_to show_events_path, notice: "Event successfully created."
     else
       render :new, status: :unprocessable_content
     end
   end
+
+  private
+
+    def event_params
+      params.expect(event: [ :party_title, :date, :location, :more_info ])
+    end
 end
