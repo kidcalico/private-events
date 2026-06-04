@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build(event_params)
 
     if @event.save
-      redirect_to show_events_path, notice: "Event successfully created."
+      redirect_to @event, notice: "Event successfully created."
     else
       render :new, status: :unprocessable_content
     end
