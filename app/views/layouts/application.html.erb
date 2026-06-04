@@ -29,6 +29,7 @@
     <div class="nav">
       <% if user_signed_in? %>
         <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+        <%= link_to "Dashboard", events_path %>
       <% end %>
     </div>
     <%= yield %>
