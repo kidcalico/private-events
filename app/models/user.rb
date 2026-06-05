@@ -9,5 +9,5 @@ class User < ApplicationRecord
 
   before_save { self.username = username.downcase }
 
-  has_many :created_events, dependent: :destroy, foreign_key: :creator_id, class_name: "Event"
+  has_many :hosted_events, dependent: :destroy, foreign_key: :host_id, class_name: "Event"
 end
