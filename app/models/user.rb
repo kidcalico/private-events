@@ -10,4 +10,6 @@ class User < ApplicationRecord
   before_save { self.username = username.downcase }
 
   has_many :hosted_events, dependent: :destroy, foreign_key: :host_id, class_name: "Event"
+  has_many :invites, foreign_key: :attendee_id
+  has_many :attended_events, through: :invites
 end
