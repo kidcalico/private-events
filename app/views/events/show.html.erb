@@ -11,6 +11,14 @@
   <p>
     <%= @event.more_info %>
   </p>
+  <p>
+    Guest List:
+    <% @event.invites.each do |invite| %>
+      <% if invite.attended_event.id == @event.id %>
+        <%= invite.attendee.username %>
+      <% end %>
+    <% end %>
+  </p>
   <% if @event.host != current_user %>
     <%= form_with model: @invite do |form| %>
       <%= form.hidden_field :attended_event_id, value: @event.id %>
