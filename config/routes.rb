@@ -19,4 +19,5 @@ Rails.application.routes.draw do
 
   resources :events
   resources :invites, only: [ :create, :destroy ]
+  resources :users, only: [ :show ]
 end

@@ -1,25 +1,23 @@
 <div class="container">
-  <h1>Your Events:</h1>
-  <% @events.each do |event| %>
-    <% if event.host.id == current_user.id %>
-      <ul>
-        <li>
-          <h2> <%= event.party_title %> </h2>
-        </li>
-        <li>
-          <%= event.date %>
-        </li>
-        <li>
-          <%= event.location %>
-        </li>
-        <li><%= link_to "Show More", event_path(event) %></li>
-      </ul>
-    <% end %>
+<%= link_to "Create New Event", new_event_path %>
+<%= link_to "My Events", user_path(current_user) %>
+  <h1>Upcoming Events:</h1>
+  <% @events.upcoming.each do |event| %>
+    <ul>
+      <li>
+        <h2> <%= event.party_title %> </h2>
+      </li>
+      <li>
+        <%= event.date %>
+      </li>
+      <li>
+        <%= event.location %>
+      </li>
+      <li><%= link_to "Show More", event_path(event) %></li>
+    </ul>
   <% end %>
-  <%= link_to "Create New Event", new_event_path %>
-  <h1>Other Events:</h1>
-  <% @events.each do |event| %>
-    <% if event.host.id != current_user.id %>
+  <h1>Past Events:</h1>
+  <% @events.past.each do |event| %>
       <ul>
         <li>
           <h2> <%= event.party_title %> </h2>
@@ -32,6 +30,5 @@
         </li>
         <li><%= link_to "Show More", event_path(event) %></li>
       </ul>
-    <% end %>
   <% end %>
 </div>
