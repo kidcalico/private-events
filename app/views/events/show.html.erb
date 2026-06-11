@@ -11,4 +11,11 @@
   <p>
     <%= @event.more_info %>
   </p>
+  <% if @event.host != current_user %>
+    <%= form_with model: @invite do |form| %>
+      <%= form.hidden_field :attended_event_id, value: @event.id %>
+      <%= form.hidden_field :rsvp, value: true %>
+      <%= form.submit "Send RSVP" %>
+    <% end %>
+  <% end %>
 </div>

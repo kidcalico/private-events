@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "invites/create"
+  get "invites/destroy"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -15,4 +17,5 @@ Rails.application.routes.draw do
   root to: "events#index"
 
   resources :events
+  resources :invites, only: [ :create, :destroy ]
 end

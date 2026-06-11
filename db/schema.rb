@@ -46,6 +46,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_223455) do
   end
 
   add_foreign_key "events", "users", column: "host_id"
-  add_foreign_key "invites", "attended_events"
-  add_foreign_key "invites", "attendees"
+  add_foreign_key "invites", "events", column: "attended_event_id"
+  add_foreign_key "invites", "users", column: "attendee_id"
 end
