@@ -1,0 +1,7 @@
+<h1>Attended Events</h1>
+<% @attended_events.each do |event| %>
+  <p>
+    <%= event.party_title %><br>
+    <%= link_to "Show More", event %>
+  </p>
+<% end %>
