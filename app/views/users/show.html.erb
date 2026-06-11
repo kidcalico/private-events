@@ -1,7 +1,18 @@
-<h1>Attended Events</h1>
+<h1>Past Events</h1>
 <% @attended_events.each do |event| %>
   <p>
-    <%= event.party_title %><br>
-    <%= link_to "Show More", event %>
+    <% if event.date < Time.now %>
+      <%= event.party_title %><br>
+      <%= link_to "Show More", event %>
+    <% end %>
+  </p>
+<% end %>
+<h1>Upcoming Events</h1>
+<% @attended_events.each do |event| %>
+  <p>
+    <% if event.date >= Time.now %>
+      <%= event.party_title %><br>
+      <%= link_to "Show More", event %>
+    <% end %>
   </p>
 <% end %>
