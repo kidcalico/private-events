@@ -28,6 +28,9 @@
     <p class="alert"><%= alert %></p>
     <div class="nav">
       <% if user_signed_in? %>
+        <span>
+        Welcome <em><%= current_user.username.capitalize %></em>!
+        </span>
         <%= button_to "Logout", destroy_user_session_path, method: :delete %>
         <%= link_to "Dashboard", events_path %>
       <% end %>
