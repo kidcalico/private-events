@@ -1,6 +1,4 @@
 <div class="container">
-<%= link_to "Create New Event", new_event_path %>
-<%= link_to "My Events", user_path(current_user) %>
   <h1>Upcoming Events:</h1>
   <% @upcoming_events.each do |event| %>
     <% if event.open? || (event.host || event.attendee) == current_user %>
