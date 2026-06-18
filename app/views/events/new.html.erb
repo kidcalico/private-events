@@ -22,6 +22,11 @@
   </div>
 
   <div>
+    <%= form.select :visibility, [["Open Event", "open"], ["Invite Only", "invite_only"]] %>
+    <%#= form.label :visibility, "Invite Only" %>
+  </div>
+
+  <div>
     <%= form.submit "Create Event" %>
   </div>
 
