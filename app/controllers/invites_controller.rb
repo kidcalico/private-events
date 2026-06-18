@@ -4,7 +4,7 @@ class InvitesController < ApplicationController
     if @invite.save
       redirect_to root_path, notice: "Thanks for responding!"
     else
-      redirect_to root_path, alert: "Something went wrong."
+      redirect_to root_path, alert: @invite.errors.messages[:attendee_id].first
     end
   end
 
