@@ -22,8 +22,16 @@
   </div>
 
   <div>
+    <%= form.label :visibility, "Visibility:" %>
     <%= form.select :visibility, [["Open Event", "open"], ["Invite Only", "invite_only"]] %>
-    <%#= form.label :visibility, "Invite Only" %>
+  </div>
+
+  <div>
+    <%= form.label :attendee_ids, "Guest list (Select Multiple):" %>
+    <%= form.select :attendee_ids, 
+                    @users.map { |user| [user.username, user.id] if user.id != current_user.id },
+                    {},
+                    { multiple: true } %>
   </div>
 
   <div>

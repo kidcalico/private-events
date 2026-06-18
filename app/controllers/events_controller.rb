@@ -11,12 +11,17 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @users = User.all
   end
 
   def create
     @event = current_user.hosted_events.build(event_params)
 
     if @event.save
+      params[:event][:attendee_ids].reject(&:blank?).each do |user_id|
+        invite = Invite.new(attended_event_id: @event.id, attendee_id: user_id)
+        invite.save
+      end
       redirect_to @event, notice: "Event successfully created."
     else
       render :new, status: :unprocessable_content
@@ -26,6 +31,6 @@ class EventsController < ApplicationController
   private
 
     def event_params
-      params.expect(event: [ :party_title, :date, :location, :more_info, :visibility ])
+      params.expect(event: [ :party_title, :date, :location, :more_info, :visibility, :attendee_ids ])
     end
 end
