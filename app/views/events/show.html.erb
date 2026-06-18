@@ -2,12 +2,11 @@
   <h2>
     <%= @event.party_title %>
   </h2>
-  <p>
-    Location: <%= @event.location %>
-  </p>
-  <p>
-    Date: <%= @event.date %>
-  </p>
+  <ul>
+    <li>Host: <%= @event.host.username.capitalize %></li>
+    <li>Location: <%= @event.location %></li>
+    <li>Date: <%= @event.date %></li>
+  </ul>
   <p>
     <%= @event.more_info %>
   </p>
