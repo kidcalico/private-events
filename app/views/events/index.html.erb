@@ -2,22 +2,8 @@
 <%= link_to "Create New Event", new_event_path %>
 <%= link_to "My Events", user_path(current_user) %>
   <h1>Upcoming Events:</h1>
-  <% @events.upcoming.each do |event| %>
-    <ul>
-      <li>
-        <h2> <%= event.party_title %> </h2>
-      </li>
-      <li>
-        <%= event.date %>
-      </li>
-      <li>
-        <%= event.location %>
-      </li>
-      <li><%= link_to "Show More", event_path(event) %></li>
-    </ul>
-  <% end %>
-  <h1>Past Events:</h1>
-  <% @events.past.each do |event| %>
+  <% @upcoming_events.each do |event| %>
+    <% if event.open? || (event.host || event.attendee) == current_user %>
       <ul>
         <li>
           <h2> <%= event.party_title %> </h2>
@@ -30,5 +16,23 @@
         </li>
         <li><%= link_to "Show More", event_path(event) %></li>
       </ul>
+    <% end %>
+  <% end %>
+  <h1>Past Events:</h1>
+  <% @past_events.each do |event| %>
+    <% if event.open? || event.host == current_user || event.attendees.include?(current_user) %>
+      <ul>
+        <li>
+          <h2> <%= event.party_title %> </h2>
+        </li>
+        <li>
+          <%= event.date %>
+        </li>
+        <li>
+          <%= event.location %>
+        </li>
+        <li><%= link_to "Show More", event_path(event) %></li>
+      </ul>
+    <% end %>
   <% end %>
 </div>

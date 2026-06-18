@@ -1,7 +1,9 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @events = Event.all
+    # @events = Event.all
+    @past_events = Event.includes(:attendees, :host).past
+    @upcoming_events = Event.includes(:attendees, :host).upcoming
   end
 
   def show
