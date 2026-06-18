@@ -13,4 +13,5 @@ class Event < ApplicationRecord
 
   scope :past, -> { where("date < ?", Time.now) }
   scope :upcoming, -> { where("date >= ?", Time.now) }
+  enum :visibility, { open: 0, invite_only: 1 }
 end

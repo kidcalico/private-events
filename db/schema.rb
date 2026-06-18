@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_223455) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_18_201838) do
   create_table "events", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "date"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_223455) do
     t.text "more_info"
     t.string "party_title"
     t.datetime "updated_at", null: false
+    t.integer "visibility"
     t.index ["host_id"], name: "index_events_on_host_id"
   end
 
