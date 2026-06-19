@@ -18,8 +18,11 @@
       <% end %>
     <% end %>
   </p>
-  <% if @event.host != current_user %>
-    <%= form_with model: @invite do |form| %>
+  <% if @event.host == current_user %>
+    <%= link_to "Edit Event", edit_event_path(@event) %>
+    <%= link_to "Delete Event", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% else %>
+    <% form_with model: @invite do |form| %>
       <%= form.hidden_field :attended_event_id, value: @event.id %>
       <%= form.hidden_field :rsvp, value: true %>
       <%= form.submit "Send RSVP" %>

@@ -30,6 +30,27 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+    @users = User.all
+    unless @event.host == current_user
+      redirect_to @event, alert: "You cannot edit this event, try one of your own."
+    end
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.host == current_user
+      if @event.update(event_params)
+        redirect_to @event, notice: "Your event details have been updated."
+      else
+        render :edit, status: :unprocessable_content
+      end
+    else
+      redirect_to @event, alert: "You cannot edit this event, try one of your own."
+    end
+  end
+
   private
 
     def event_params

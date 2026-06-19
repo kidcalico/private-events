@@ -1,0 +1,41 @@
+<h1>Edit Event</h1>
+
+<%= form_with model: @event do |form| %>
+  <div>
+    <%= form.label :party_title %>
+    <%= form.text_field :party_title %>
+  </div>
+
+  <div>
+    <%= form.label :date %>
+    <%= form.datetime_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div>
+    <%= form.label :more_info %>
+    <%= form.text_area :more_info %>
+  </div>
+
+  <div>
+    <%= form.label :visibility, "Visibility:" %>
+    <%= form.select :visibility, [["Open Event", "open"], ["Invite Only", "invite_only"]] %>
+  </div>
+
+  <div>
+    <%= form.label :attendee_ids, "Guest list (Select Multiple):" %>
+    <%= form.select :attendee_ids, 
+                    @users.map { |user| [user.username, user.id] if user.id != current_user.id },
+                    {},
+                    { multiple: true } %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Event" %>
+  </div>
+
+<% end %>
