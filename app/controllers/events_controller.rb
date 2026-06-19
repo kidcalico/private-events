@@ -42,6 +42,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if @event.host == current_user
       if @event.update(event_params)
+        Invite.where(attended_event_id: @event.id).destroy_all
+        params[:event][:attendee_ids].reject(&:blank?).each do |user_id|
+          invite = Invite.new(attended_event_id: @event.id, attendee_id: user_id)
+          invite.save
+        end
         redirect_to @event, notice: "Your event details have been updated."
       else
         render :edit, status: :unprocessable_content
