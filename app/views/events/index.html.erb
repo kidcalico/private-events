@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Upcoming Events:</h1>
   <% @upcoming_events.each do |event| %>
-    <% if event.open? || (event.host || event.attendee) == current_user %>
+    <% if event.open? || event.host == current_user || event.attendees.include?(current_user) %>
       <ul>
         <li>
           <h2> <%= event.party_title %> </h2>
