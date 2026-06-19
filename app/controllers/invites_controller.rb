@@ -9,5 +9,11 @@ class InvitesController < ApplicationController
   end
 
   def destroy
+    @invite = Invite.find(params[:id])
+    if @invite.destroy
+      redirect_to root_path, notice: "You were removed from the guest list."
+    else
+      redirect_to root_path, alert: "Something went wrong."
+    end
   end
 end
