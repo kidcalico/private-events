@@ -27,7 +27,6 @@
   </div>
 
   <div>
-    <%# <%= form.label :attendee_ids, "Guest list (Select Multiple):" %>
     <span>Guest list: </span>
     <% @users.each do |user| %>
       <% unless user.id == current_user.id %>
@@ -37,11 +36,6 @@
         </div>
       <% end %>
     <% end %>
-
-    <%#= form.select :attendee_ids, 
-                    @users.map { |user| [user.username, user.id] if user.id != current_user.id },
-                    {},
-                    { multiple: true } %>
   </div>
 
   <div>
