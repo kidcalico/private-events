@@ -27,8 +27,18 @@
   </div>
 
   <div>
-    <%= form.label :attendee_ids, "Guest list (Select Multiple):" %>
-    <%= form.select :attendee_ids, 
+    <%# <%= form.label :attendee_ids, "Guest list (Select Multiple):" %>
+    <span>Guest list: </span>
+    <% @users.each do |user| %>
+      <% unless user.id == current_user.id %>
+        <div>
+          <%= check_box_tag "event[attendee_ids][]", user.id, @event.attendees.include?(user), id: "attendee_#{user.id}" %>
+          <%= label_tag "attendee_#{user.id}", user.username %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%#= form.select :attendee_ids, 
                     @users.map { |user| [user.username, user.id] if user.id != current_user.id },
                     {},
                     { multiple: true } %>
