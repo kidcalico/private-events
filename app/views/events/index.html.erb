@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>Upcoming Events:</h1>
+  <h2>Upcoming Events:</h2>
   <% @upcoming_events.each do |event| %>
-    <% if event.open? || event.host == current_user || event.attendees.include?(current_user) %>
+    <% if event.open? || event.attendees.include?(current_user) %>
       <ul>
         <li>
-          <h2> <%= event.party_title %> </h2>
+          <h3> <%= event.party_title %> </h3>
         </li>
         <li>
           <%= event.date %>
@@ -16,12 +16,12 @@
       </ul>
     <% end %>
   <% end %>
-  <h1>Past Events:</h1>
+  <h2>Past Events:</h2>
   <% @past_events.each do |event| %>
-    <% if event.open? || event.host == current_user || event.attendees.include?(current_user) %>
+    <% if event.open? || event.attendees.include?(current_user) %>
       <ul>
         <li>
-          <h2> <%= event.party_title %> </h2>
+          <h3> <%= event.party_title %> </h3>
         </li>
         <li>
           <%= event.date %>

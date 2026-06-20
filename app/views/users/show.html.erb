@@ -1,18 +1,31 @@
-<h1>Past Events</h1>
-<% @attended_events.each do |event| %>
+<h1>Events I'm Attending:</h1>
+<h2>Upcoming</h2>
+<% @attended_events.upcoming.each do |event| %>
   <p>
-    <% if event.date < Time.now %>
       <%= event.party_title %><br>
       <%= link_to "Show More", event %>
-    <% end %>
   </p>
 <% end %>
-<h1>Upcoming Events</h1>
-<% @attended_events.each do |event| %>
+<h2>Past</h2>
+<% @attended_events.past.each do |event| %>
   <p>
-    <% if event.date >= Time.now %>
       <%= event.party_title %><br>
       <%= link_to "Show More", event %>
-    <% end %>
+  </p>
+<% end %>
+
+<h1>Events I'm Hosting:</h1>
+<h2>Upcoming</h2>
+<% @hosted_events.upcoming.each do |event| %>
+  <p>
+      <%= event.party_title %><br>
+      <%= link_to "Show More", event %>
+  </p>
+<% end %>
+<h2>Past</h2>
+<% @hosted_events.past.each do |event| %>
+  <p>
+      <%= event.party_title %><br>
+      <%= link_to "Show More", event %>
   </p>
 <% end %>
