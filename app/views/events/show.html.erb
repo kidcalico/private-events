@@ -13,7 +13,7 @@
   <p>
     Guest List:
     <% @event.invites.each do |invite| %>
-      <% if invite.attended_event.id == @event.id %>
+      <% if invite.attended_event.id == @event.id && invite.rsvp == true %>
         <%= invite.attendee.username %>
       <% end %>
     <% end %>
@@ -22,12 +22,20 @@
     <%= link_to "Edit Event", edit_event_path(@event) %>
     <%= link_to "Delete Event", event_path(@event), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <% else %>
-    <% if @invite %>
+    <% if @event.open? && !@event.attendees.include?(current_user) %>
       <%= form_with model: @invite do |form| %>
         <%= form.hidden_field :attended_event_id, value: @event.id %>
         <%= form.hidden_field :rsvp, value: true %>
         <%= form.submit "Send RSVP" %>
       <% end %>
+    <% elsif @invite && @invite.rsvp != true %>
+      <%= form_with model: @invite do |form| %>
+        <%= form.hidden_field :attended_event_id, value: @event.id %>
+        <%= form.hidden_field :rsvp, value: true %>
+        <%= form.submit "Send RSVP" %>
+      <% end %>
+      <%= link_to "Remove me from the guest list.", invite_path(@invite), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% elsif @event.attendees.include?(current_user) %>
       <%= link_to "Remove me from the guest list.", invite_path(@invite), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     <% end %>
   <% end %>

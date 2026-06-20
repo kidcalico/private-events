@@ -1,10 +1,21 @@
 class InvitesController < ApplicationController
   def create
     @invite = current_user.invites.build(attended_event_id: params[:invite][:attended_event_id], rsvp: params[:invite][:rsvp])
+    @event = Event.find(@invite.attended_event_id)
     if @invite.save
-      redirect_to root_path, notice: "Thanks for responding!"
+      redirect_to @event, notice: "Thanks for responding!"
     else
-      redirect_to root_path, alert: @invite.errors.messages[:attendee_id].first
+      redirect_to @event, alert: @invite.errors.messages[:attendee_id].first
+    end
+  end
+
+  def update
+    @invite = Invite.find(params[:id])
+    @event = Event.find(@invite.attended_event_id)
+    if @invite.update(rsvp: true)
+      redirect_to @event, notice: "Your RSVP has been accepted."
+    else
+      redirect_to @event, alert: "Something went wrong."
     end
   end
 
